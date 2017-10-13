@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/shawn/ColorSquareDrawable/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ad73cc314784e1ec92d74cf6e1e1c25844115d52">
+        <dex dex="/Users/shawn/ColorSquareDrawable/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e8b421f2e39065285471565cd31ba8dabe58238f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/shawn/ColorSquareDrawable/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="/Users/shawn/ColorSquareDrawable/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3acb6d0a922a022d7f83436503955a63d95a03e5/classes.dex" />
+    </item>
+
+</items>
