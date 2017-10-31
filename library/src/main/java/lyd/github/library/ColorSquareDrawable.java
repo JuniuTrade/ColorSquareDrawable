@@ -3,7 +3,9 @@ package lyd.github.library;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
@@ -16,19 +18,30 @@ import android.support.annotation.Nullable;
 
 public class ColorSquareDrawable extends Drawable {
 
-    //颜色
+    /**
+     * 颜色
+     */
     private int mColor;
-    //是否显示圆形
+    /**
+     * 是否显示圆形
+     */
     private boolean mIsCircular;
-    //左上角弧度
+    /**
+     * 左上角弧度
+     */
     private int mTopLeftRadius;
-    //右上角弧度
+    /**
+     * 右上角弧度
+     */
     private int mTopRightRadius;
-    //左下角弧度
+    /**
+     * 左下角弧度
+     */
     private int mBottomLeftRadius;
-    //右下角弧度
+    /**
+     * 右下角弧度
+     */
     private int mBottomRightRadius;
-
     private Paint mPaint;
 
     /**
@@ -69,17 +82,17 @@ public class ColorSquareDrawable extends Drawable {
      * @param bottomLeftRadius
      * @param bottomRightRadius
      */
-    public ColorSquareDrawable(int color, int topLeftRadius, int topRightRadius, int bottomLeftRadius, int bottomRightRadius) {
-        this(color, false, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius);
+    public ColorSquareDrawable(int color, int topLeftRadius, int topRightRadius, int bottomRightRadius, int bottomLeftRadius) {
+        this(color, false, topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius);
     }
 
-    public ColorSquareDrawable(int color, boolean isSquare, int topLeftRadius, int topRightRadius, int bottomLeftRadius, int bottomRightRadius) {
+    public ColorSquareDrawable(int color, boolean isSquare, int topLeftRadius, int topRightRadius, int bottomRightRadius, int bottomLeftRadius) {
         this.mColor = color;
         this.mIsCircular = isSquare;
         this.mTopLeftRadius = topLeftRadius;
         this.mTopRightRadius = topRightRadius;
-        this.mBottomLeftRadius = bottomLeftRadius;
         this.mBottomRightRadius = bottomRightRadius;
+        this.mBottomLeftRadius = bottomLeftRadius;
         initPaint();
     }
 
@@ -110,7 +123,16 @@ public class ColorSquareDrawable extends Drawable {
         }
         //圆角
         else {
-            canvas.drawRoundRect(new RectF(getBounds()), mTopLeftRadius, mTopRightRadius, mPaint);
+            float cx = (getBounds().right - getBounds().left) / 2f;
+            float cy = (getBounds().bottom - getBounds().top) / 2f;
+            //最大圆角半径
+            float maxRadius = Math.abs(cx) <= Math.abs(cy) ? Math.abs(cx) : Math.abs(cy);
+            Path path = new Path();
+            drawTopLeft(maxRadius, path);
+            drawTopRight(maxRadius, path);
+            drawBottomRight(maxRadius, path);
+            drawBottomLeft(maxRadius, path);
+            canvas.drawPath(path, mPaint);
         }
     }
 
@@ -139,7 +161,52 @@ public class ColorSquareDrawable extends Drawable {
                 return PixelFormat.OPAQUE;
             case 0:
                 return PixelFormat.TRANSPARENT;
+            default:
         }
         return PixelFormat.TRANSLUCENT;
+    }
+
+    private void drawTopLeft(float radius, Path path) {
+        radius = mTopLeftRadius <= radius ? mTopLeftRadius : radius;
+        RectF rectF = new RectF();
+        Rect bounds = getBounds();
+        rectF.left = bounds.left;
+        rectF.top = bounds.top;
+        rectF.right = bounds.left + 2 * radius;
+        rectF.bottom = bounds.top + 2 * radius;
+        path.arcTo(rectF, 180, 90);
+    }
+
+    private void drawTopRight(float radius, Path path) {
+        radius = mTopRightRadius <= radius ? mTopRightRadius : radius;
+        RectF rectF = new RectF();
+        Rect bounds = getBounds();
+        rectF.left = bounds.right - 2 * radius;
+        rectF.top = bounds.top;
+        rectF.right = bounds.right;
+        rectF.bottom = bounds.top + 2 * radius;
+        path.arcTo(rectF, 270, 90);
+    }
+
+    private void drawBottomRight(float radius, Path path) {
+        radius = mBottomRightRadius <= radius ? mBottomRightRadius : radius;
+        RectF rectF = new RectF();
+        Rect bounds = getBounds();
+        rectF.left = bounds.right - 2 * radius;
+        rectF.top = bounds.bottom - 2 * radius;
+        rectF.right = bounds.right;
+        rectF.bottom = bounds.bottom;
+        path.arcTo(rectF, 0, 90);
+    }
+
+    private void drawBottomLeft(float radius, Path path) {
+        radius = mBottomLeftRadius <= radius ? mBottomLeftRadius : radius;
+        RectF rectF = new RectF();
+        Rect bounds = getBounds();
+        rectF.left = bounds.left;
+        rectF.top = bounds.bottom - 2 * radius;
+        rectF.right = bounds.left + 2 * radius;
+        rectF.bottom = bounds.bottom;
+        path.arcTo(rectF, 90, 90);
     }
 }

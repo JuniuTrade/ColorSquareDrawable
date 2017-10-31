@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         image1.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorAccent)));
         image2.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorPrimary), false));
-        image3.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark), 10));
-        image4.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorAccent), 10, 0, 0, 0));
-        image5.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark), 0, 10, 0, 0));
+        image3.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark), 50));
+        image4.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorAccent),40, 0, 80, 0));
+        image5.setImageDrawable(new ColorSquareDrawable(ContextCompat.getColor(this, R.color.colorPrimaryDark), 70, 70, 0, 70));
     }
 }
