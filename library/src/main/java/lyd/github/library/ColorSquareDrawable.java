@@ -29,19 +29,19 @@ public class ColorSquareDrawable extends Drawable {
     /**
      * 左上角弧度
      */
-    private int mTopLeftRadius;
+    private float mTopLeftRadius;
     /**
      * 右上角弧度
      */
-    private int mTopRightRadius;
+    private float mTopRightRadius;
     /**
      * 左下角弧度
      */
-    private int mBottomLeftRadius;
+    private float mBottomLeftRadius;
     /**
      * 右下角弧度
      */
-    private int mBottomRightRadius;
+    private float mBottomRightRadius;
     private Paint mPaint;
 
     /**
@@ -69,7 +69,7 @@ public class ColorSquareDrawable extends Drawable {
      * @param color
      * @param radius
      */
-    public ColorSquareDrawable(int color, int radius) {
+    public ColorSquareDrawable(int color, float radius) {
         this(color, false, radius, radius, radius, radius);
     }
 
@@ -82,13 +82,13 @@ public class ColorSquareDrawable extends Drawable {
      * @param bottomLeftRadius
      * @param bottomRightRadius
      */
-    public ColorSquareDrawable(int color, int topLeftRadius, int topRightRadius, int bottomRightRadius, int bottomLeftRadius) {
+    public ColorSquareDrawable(int color, float topLeftRadius, float topRightRadius, float bottomRightRadius, float bottomLeftRadius) {
         this(color, false, topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius);
     }
 
-    public ColorSquareDrawable(int color, boolean isSquare, int topLeftRadius, int topRightRadius, int bottomRightRadius, int bottomLeftRadius) {
+    public ColorSquareDrawable(int color, boolean isCircular, float topLeftRadius, float topRightRadius, float bottomRightRadius, float bottomLeftRadius) {
         this.mColor = color;
-        this.mIsCircular = isSquare;
+        this.mIsCircular = isCircular;
         this.mTopLeftRadius = topLeftRadius;
         this.mTopRightRadius = topRightRadius;
         this.mBottomRightRadius = bottomRightRadius;
